@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harley Quinn Jada Smith - Music</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .music-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .music-button {
+            display: block;
+            padding: 18px 25px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .music-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .music-button:active {
+            transform: translateY(-1px);
+        }
+        
+        .music-button::before {
+            content: '♪';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+            opacity: 0.7;
+        }
+        
+        .song-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .song-tag {
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+        
+        .music-button:nth-child(1) {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .music-button:nth-child(2) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .music-button:nth-child(3) {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        .music-button:nth-child(4) {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+        }
+        
+        .music-button:nth-child(5) {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .subtitle {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Harley Quinn Jada Smith</h1>
+        <p class="subtitle">Listen to My Music on SoundCloud</p>
+        
+        <div class="music-links">
+            <a href="https://on.soundcloud.com/716HFAJ7AMA45mjarz" target="_blank" rel="noopener noreferrer" class="music-button">
+                <span class="song-title">She told me No</span>
+                <span class="song-tag">Listen on SoundCloud</span>
+            </a>
+            
+            <a href="https://on.soundcloud.com/zI1Q6J9SdUqbuRigw7" target="_blank" rel="noopener noreferrer" class="music-button">
+                <span class="song-title">Dreamin' of my Paradise</span>
+                <span class="song-tag">#FAVORITE-Vibez</span>
+            </a>
+            
+            <a href="https://on.soundcloud.com/1erBCpJdoAvAPk5xHF" target="_blank" rel="noopener noreferrer" class="music-button">
+                <span class="song-title">Marry me (baby i want you)</span>
+                <span class="song-tag">#gahdayum</span>
+            </a>
+            
+            <a href="https://on.soundcloud.com/tEyfmMpmP1FX9moLn2" target="_blank" rel="noopener noreferrer" class="music-button">
+                <span class="song-title">Dressed in White</span>
+                <span class="song-tag">#MAIN-BEST</span>
+            </a>
+            
+            <a href="https://on.soundcloud.com/cCUottj4dAlblvEF3e" target="_blank" rel="noopener noreferrer" class="music-button">
+                <span class="song-title">Save Me (My-Sanity)#2</span>
+                <span class="song-tag">Listen on SoundCloud</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
