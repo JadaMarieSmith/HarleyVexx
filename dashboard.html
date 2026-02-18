@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HarleyVexx Creator Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .stats-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 10px;
+            font-size: 0.95em;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: white;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            float: right;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        .form-group {
+            margin: 20px 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #ddd;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #ccc;
+        }
+
+        .auth-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .auth-buttons button {
+            background: white;
+            color: #667eea;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .auth-buttons button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .user-info {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-align: right;
+        }
+
+        .user-info p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-buttons" id="authButtons">
+        <button onclick="openLoginModal()">Login</button>
+        <button onclick="openRegisterModal()">Sign Up</button>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🎵 HarleyVexx Creator Platform</h1>
+            <p>Artist Dashboard • Royalty Tracking • Indie Empire</p>
+        </header>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">📀</div>
+                <h3>Artist Catalog</h3>
+                <p>Showcase your music portfolio. Display all releases, stream counts, and engage listeners across platforms.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">💰</div>
+                <h3>Royalty Dashboard</h3>
+                <p>Track earnings from SoundExchange, Spotify, Apple Music, and more. Real-time revenue insights.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🎤</div>
+                <h3>Lyricist Hiring</h3>
+                <p>Post collaboration opportunities. Find talented co-writers while retaining 100% of your rights.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">⚖️</div>
+                <h3>Ownership Verified</h3>
+                <p>Official legal statement. PRO-ready verification for BMI, ASCAP, MLC, and SoundExchange registration.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">📊</div>
+                <h3>Analytics & Insights</h3>
+                <p>Deep dive into your metrics. Track growth, engagement, and trends across all platforms.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🚀</div>
+                <h3>Social Integration</h3>
+                <p>Promote releases on Twitter/X. Automated announcements and fan engagement tools.</p>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h2 style="color: #333; margin-bottom: 10px;">HarleyVexx by the Numbers</h2>
+            <p style="color: #666; margin-bottom: 20px;">Independent artist • 100% rights owner • Self-taught producer</p>
+            
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-number">625K+</div>
+                    <div class="stat-label">Total Streams</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">550+</div>
+                    <div class="stat-label">Tracks Released</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">$8.4K</div>
+                    <div class="stat-label">Monthly Earnings</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Creative Control</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Ready to Launch Your Creator Empire?</h2>
+            <p>Build your artist platform with Base44. Manage music, royalties, and collaborations in one place.</p>
+            <a href="https://harley-vexx-4-creators101-copy-6aa0dc21.base44.app" class="cta-button">
+                Launch App →
+            </a>
+        </div>
+
+        <footer>
+            <p>HarleyVexx Creator Platform v1.0</p>
+            <p>
+                <a href="https://on.soundcloud.com/9BWtqT2nIcIiAubq3X" style="color: white; text-decoration: underline;">
+                    🎧 Listen on SoundCloud
+                </a>
+            </p>
+            <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.8;">
+                © 2026 Jada M. Smith (HarleyVexx) • All Rights Reserved
+            </p>
+        </footer>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeLoginModal()">&times;</span>
+            <h2 style="margin-bottom: 20px; color: #333;">Artist Login</h2>
+            <div id="loginAlert"></div>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" placeholder="jada@harleyvexx.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-bottom: 10px;">Login</button>
+                <button type="button" class="btn btn-secondary" style="width: 100%;" onclick="handleGoogleLogin()">
+                    Login with Google
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeRegisterModal()">&times;</span>
+            <h2 style="margin-bottom: 20px; color: #333;">Create Account</h2>
+            <div id="registerAlert"></div>
+            <form onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="registerName" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="registerEmail" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="registerPassword" placeholder="Create password" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Authentication Management
+        let currentUser = null;
+        let authToken = localStorage.getItem('authToken');
+
+        // Check if user is already logged in
+        window.addEventListener('load', function() {
+            if (authToken) {
+                checkAuthStatus();
+            }
+        });
+
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+            document.getElementById('loginAlert').innerHTML = '';
+        }
+
+        function openRegisterModal() {
+            document.getElementById('registerModal').classList.add('active');
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('registerModal').classList.remove('active');
+            document.getElementById('registerAlert').innerHTML = '';
+        }
+
+        function showAlert(elementId, message, type) {
+            const alertDiv = document.getElementById(elementId);
+            alertDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                // Mock login - in production, call your API
+                if (email === 'jada@harleyvexx.com' && password === 'harleyvexx2026') {
+                    const mockToken = 'token_' + Math.random().toString(36).substr(2, 9);
+                    localStorage.setItem('authToken', mockToken);
+                    authToken = mockToken;
+                    
+                    currentUser = {
+                        id: 'artist_harleyvexx',
+                        email: email,
+                        name: 'Jada M. Smith',
+                        artist: 'HarleyVexx'
+                    };
+
+                    showAlert('loginAlert', 'Login successful! Welcome back.', 'success');
+                    setTimeout(() => {
+                        closeLoginModal();
+                        updateAuthUI();
+                    }, 1000);
+                } else {
+                    showAlert('loginAlert', 'Invalid email or password.', 'error');
+                }
+            } catch (error) {
+                showAlert('loginAlert', 'Login failed: ' + error.message, 'error');
+            }
+        }
+
+        async function handleRegister(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            try {
+                // Mock registration
+                showAlert('registerAlert', 'Account created successfully! Please log in.', 'success');
+                setTimeout(() => {
+                    closeRegisterModal();
+                    openLoginModal();
+                    document.getElementById('loginEmail').value = email;
+                }, 1000);
+            } catch (error) {
+                showAlert('registerAlert', 'Registration failed: ' + error.message, 'error');
+            }
+        }
+
+        async function handleGoogleLogin() {
+            try {
+                showAlert('loginAlert', 'Google login integration available on production deployment.', 'error');
+                // In production: redirect to OAuth flow
+                // window.location.href = '/api/auth/google';
+            } catch (error) {
+                showAlert('loginAlert', 'Google login failed: ' + error.message, 'error');
+            }
+        }
+
+        function checkAuthStatus() {
+            // In production: verify token with backend
+            if (authToken) {
+                currentUser = {
+                    id: 'artist_harleyvexx',
+                    email: 'jada@harleyvexx.com',
+                    name: 'Jada M. Smith',
+                    artist: 'HarleyVexx'
+                };
+                updateAuthUI();
+            }
+        }
+
+        function updateAuthUI() {
+            const authButtons = document.getElementById('authButtons');
+            
+            if (currentUser) {
+                authButtons.innerHTML = `
+                    <div class="user-info">
+                        <p>Welcome, <strong>${currentUser.name}</strong></p>
+                        <p style="font-size: 0.8em; margin-top: 5px;">${currentUser.artist}</p>
+                        <button onclick="logout()" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9em;">Logout</button>
+                    </div>
+                `;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('authToken');
+            authToken = null;
+            currentUser = null;
+            location.reload();
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const loginModal = document.getElementById('loginModal');
+            const registerModal = document.getElementById('registerModal');
+            
+            if (event.target === loginModal) {
+                closeLoginModal();
+            }
+            if (event.target === registerModal) {
+                closeRegisterModal();
+            }
+        }
+    </script>
+</body>
+</html>
